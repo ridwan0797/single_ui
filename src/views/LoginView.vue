@@ -61,7 +61,7 @@ export default defineComponent({
           password: form.value.password
         }
       })
-      .then((x) => {
+      .then((x: any) => {
         localStorage.setItem('token', x.data.token as string)
         showSuccess('Login Berhasil')
         .then(() => {

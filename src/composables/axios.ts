@@ -7,21 +7,21 @@ interface UseAxiosOptions extends AxiosRequestConfig {
 }
 
 export function useAxios<T = any>() {
-  const data = ref<T | null>(null);
+  const data = ref<any |T | null>(null);
   const error = ref<Error | null>(null);
   const isLoading = ref(false);
 
   const fetchData = (options: UseAxiosOptions): Promise<void> => {
     isLoading.value = true;
 
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       axios(options)
         .then((response: AxiosResponse<T>) => {
           data.value = response.data;
           error.value = null;
           resolve(response);
         })
-        .catch((e: AxiosError) => {
+        .catch((e: any) => {
           data.value = null;
           error.value = e;
           reject(e);
